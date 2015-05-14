@@ -1,0 +1,169 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
+abstract class Food{
+	
+	public String name;
+	public int callority;
+	public String cooking; // way of cooking
+	
+	public void setFood(String name, int callority, String cooking){    // fills values 
+
+		this.name = name;
+		this.callority = callority;
+		this.cooking = cooking;
+	}
+	
+public String toString(){ // output 
+		
+		System.out.println("Name: " + name);
+		System.out.println("Callority " + callority);
+		System.out.println("Ways of cooking " + cooking);
+		System.out.println("");
+		
+		return "";
+	}
+}
+
+class Plants extends Food{
+	
+	public String family; // family of plant
+	
+	public void setPlants(String name, int callority, String cooking, String family){
+
+		this.name = name;
+		this.callority = callority;
+		this.cooking = cooking;
+		this.family = family;
+		
+	}
+
+	public String toString(){
+	
+		super.toString();
+		System.out.println("Family of plant: " + family);
+		return "";
+	}
+}
+
+class Meat extends Food{
+	
+	public String typeP; // type of proteins
+	int amountP;
+	
+	public void setMeat(String name, int callority, String cooking, String typeP, int amountP ){
+
+		this.name = name;
+		this.callority = callority;
+		this.cooking = cooking;
+		this.typeP = typeP;
+		this.amountP = amountP;
+	}
+
+	public String toString(){
+	
+		super.toString();
+		System.out.println("Type of proteins: " + typeP);
+		System.out.println("Amount of proteins: " + typeP);
+		return "";
+	}
+}
+
+class Fruits extends Food{
+	
+	public String shape; // Shape of seed
+	public int volume; // volume of seed
+	
+	public void setFruits(String name, int callority, String cooking, String shape, int volume){
+		
+		this.name = name;
+		this.callority = callority;
+		this.cooking = cooking;
+		this.shape = shape;
+		this.volume = volume;
+	}
+
+	public String toString(){
+		
+		super.toString();
+		System.out.println("Shape of seed: " + shape);
+		System.out.println("volume of seed: " + volume);
+		return "";
+	}
+}
+
+class Vegetables extends Food{
+	
+	public void setVegetables(String name, int callority, String cooking){
+		
+		this.name = name;
+		this.callority = callority;
+		this.cooking = cooking;
+			}
+}
+
+class SortedByName implements Comparator<Food>{// names of food
+
+    public int compare(Food obj1, Food obj2) {
+    	String str1 = obj1.name;
+    	String str2 = obj2.name;
+    	return str1.compareTo(str2);
+    }
+}
+
+class SortedByCallority implements Comparator<Food>{
+
+    public int compare(Food obj1, Food obj2) {
+    	if(obj1.callority > obj2.callority){
+    		return 1;
+    	}else{
+    		  		return -1;
+    		
+    	}
+    }
+}
+
+class Main{
+
+	public static void main(String[] args){
+		Food food[] = new Food[3];
+		food[0] = new Fruits();
+		food[1] = new Vegetables();
+		food[2] = new Meat();
+		
+		
+		((Fruits) food[0]).setFruits("Tomatoes", 35,  "frying, boiling", "oval", 1);
+		((Vegetables) food[1]).setVegetables("Carrot", 47,  "boiling, frying" );
+		((Meat) food[2]).setMeat("Venison", 678,  "frying, boiling, baking", "B2", 232);
+		
+		for(Food item: food){
+		
+			item.toString();
+			
+		}
+
+		System.out.println("");
+		System.out.println("----------");
+		System.out.println("----------");
+		System.out.println("----------");
+		System.out.println("");
+		Arrays.sort(food, new SortedByName());
+		for(Food item: food){
+			item.toString();
+		}
+
+		System.out.println("");
+		System.out.println("----------");
+		System.out.println("----------");
+		System.out.println("----------");
+		System.out.println("");
+		Arrays.sort(food, new SortedByCallority());
+		for(Food item: food){
+				item.toString();
+			
+		}
+    }
+}
+
+	
+	
